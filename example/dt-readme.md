@@ -18,7 +18,8 @@ enable apisix mocking
 
 start go access
 ------
-tail -F access.log | docker run -p 7890:7890 --rm -i -e LANG=$LANG allinurl/goaccess -a -o html --log-format COMBINED --real-time-html - > report.html
+cd nginx_log
+tail -F access.log | docker run -p 7890:7890 --rm -i -v ../nginx_log/:/logs -v ../goaccess_conf/goaccess.conf:/etc/goaccess/goaccess.conf -e LANG=$LANG allinurl/goaccess -a -o html - > index.html
 
 
 port
