@@ -22,9 +22,9 @@ services:
     image: apache/apisix-dashboard:2.13-alpine
     restart: always
     volumes:
-    - ./dashboard_conf/conf.yaml:/usr/local/apisix-dashboard/conf/conf.yaml
+      - ./dashboard_conf/conf.yaml:/usr/local/apisix-dashboard/conf/conf.yaml
     ports:
-    - "9000:9000"
+      - "9000:9000"
     networks:
       apisix:
 
@@ -60,51 +60,19 @@ services:
     networks:
       apisix:
 
-  web1:
+  nginx:
     image: nginx:1.19.0-alpine
     restart: always
     volumes:
-      - ./upstream/web1.conf:/etc/nginx/nginx.conf
+      - ./upstream/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx_log/:/logs
     ports:
-      - "9081:80/tcp"
+      - "80:80/tcp"
     environment:
       - NGINX_PORT=80
     networks:
       apisix:
 
-  web2:
-    image: nginx:1.19.0-alpine
-    restart: always
-    volumes:
-      - ./upstream/web2.conf:/etc/nginx/nginx.conf
-    ports:
-      - "9082:80/tcp"
-    environment:
-      - NGINX_PORT=80
-    networks:
-      apisix:
-
-  prometheus:
-    image: prom/prometheus:v2.25.0
-    restart: always
-    volumes:
-      - ./prometheus_conf/prometheus.yml:/etc/prometheus/prometheus.yml
-    ports:
-      - "9090:9090"
-    networks:
-      apisix:
-
-  grafana:
-    image: grafana/grafana:7.3.7
-    restart: always
-    ports:
-      - "3000:3000"
-    volumes:
-      - "./grafana_conf/provisioning:/etc/grafana/provisioning"
-      - "./grafana_conf/dashboards:/var/lib/grafana/dashboards"
-      - "./grafana_conf/config/grafana.ini:/etc/grafana/grafana.ini"
-    networks:
-      apisix:
 
 networks:
   apisix:
