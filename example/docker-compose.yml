@@ -84,6 +84,7 @@ services:
 #      - ./goaccess_conf/goaccess.conf:/etc/goaccess/goaccess.conf
 #    networks:
 #      apisix:
+#    command: -a
 
 networks:
   apisix:
