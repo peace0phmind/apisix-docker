@@ -81,7 +81,7 @@ services:
       - "7890:7890/tcp"
     volumes:
       - ./nginx_log/:/logs
-      - .goaccess_conf/goaccess.conf:/etc/goaccess/goaccess.conf:ro
+      - ./goaccess_conf/goaccess.conf:/etc/goaccess/goaccess.conf:ro
     networks:
       apisix:
 
