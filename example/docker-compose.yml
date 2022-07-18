@@ -74,17 +74,17 @@ services:
     networks:
       apisix:
 
-#  goaccess:
-#    image: allinurl/goaccess
-#    restart: always
-#    ports:
-#      - "7890:7890/tcp"
-#    volumes:
-#      - ./nginx_log/:/logs
-#      - ./goaccess_conf/goaccess.conf:/etc/goaccess/goaccess.conf
-#    networks:
-#      apisix:
-#    command: -a
+  goaccess:
+    image: allinurl/goaccess
+    restart: always
+    ports:
+      - "7890:7890/tcp"
+    volumes:
+      - ./nginx_log/:/logs
+      - ./goaccess_conf/goaccess.conf:/etc/goaccess/goaccess.conf
+    networks:
+      apisix:
+    command: -a
 
 networks:
   apisix:
